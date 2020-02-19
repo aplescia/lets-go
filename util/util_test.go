@@ -44,5 +44,4 @@ func TestInitLoggerWithLevel(t *testing.T) {
 	level, err := logrus.ParseLevel("error")
 	logObject, _ = util.InitLoggerWithLevel(&level)
 	assert.Equal(t, logrus.ErrorLevel.String(), logObject.Level.String())
-
 }
