@@ -26,3 +26,13 @@ then add the following to your go.mod file (or directly import it):
 github.com/Chewy-Inc/lets-go
 ```
  
+ If you see:
+ ```shell script
+fatal: could not read Username for 'https://github.com': terminal prompts disabled
+```
+
+try running the following:
+
+```shell script
+git config --global url."git@github.com:".insteadOf "https://github.com"
+```
