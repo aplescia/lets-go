@@ -1,4 +1,4 @@
-module github.com/Chewy-Inc/lets-go/v1
+module github.com/Chewy-Inc/lets-go
 
 go 1.13
 
