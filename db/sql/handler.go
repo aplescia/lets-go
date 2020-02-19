@@ -1,7 +1,7 @@
 package sql
 
 import (
-	"github.com/Chewy-Inc/lets-go/util"
+	"github.com/Chewy-Inc/lets-go/v1/util"
 	"github.com/jinzhu/gorm"
 	"os"
 )
