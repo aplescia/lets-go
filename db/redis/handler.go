@@ -1,7 +1,7 @@
 package redis
 
 import (
-	"github.com/Chewy-Inc/lets-go/v1/util"
+	"github.com/Chewy-Inc/lets-go/util"
 	"github.com/go-redis/redis"
 )
 
