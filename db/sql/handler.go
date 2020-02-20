@@ -3,12 +3,9 @@ package sql
 import (
 	"github.com/Chewy-Inc/lets-go/util"
 	"github.com/jinzhu/gorm"
-	"os"
 )
 
 var (
-	connString = os.Getenv("POSTGRES_URL")
-	conn, _    = OpenConnection(connString)
 	log, _ = util.InitLoggerWithLevel(nil)
 )
 

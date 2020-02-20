@@ -6,7 +6,6 @@ import (
 )
 
 var (
-	Client = ClusterClient()
 	log, _ = util.InitLoggerWithLevel(nil)
 )
 
