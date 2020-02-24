@@ -8,13 +8,13 @@ import (
 )
 
 var (
-	region = util.GetEnv("AWS_REGION", "us-east-1")
+	currentRegion = util.GetEnv("AWS_REGION", "us-east-1")
 	log, _ = util.InitLoggerWithLevel(nil)
 )
 
-func PutToKinesis(streamName string, input string) (bool, error) {
+func PutToKinesis(streamName string, streamRegion string, input string) (bool, error) {
 	s, err := session.NewSession(&aws.Config{
-		Region: aws.String(region),
+		Region: aws.String(streamRegion),
 	})
 	if err != nil {
 		panic(err)
@@ -35,9 +35,9 @@ func PutToKinesis(streamName string, input string) (bool, error) {
 	}
 }
 
-func PutManyRecordsToKinesis(streamName string, inputs []string) (bool,error) {
+func PutManyRecordsToKinesis(streamName string, streamRegion string, inputs []string) (bool,error) {
 	s, err := session.NewSession(&aws.Config{
-		Region: aws.String(region),
+		Region: aws.String(streamRegion),
 	})
 	if err != nil {
 		panic(err)
