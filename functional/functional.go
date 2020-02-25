@@ -1,9 +1,9 @@
 package functional
 
-func All(collection []*interface{}, fn func(interface{}) bool) bool {
+func All(collection []*interface{}, fn func(*interface{}) bool) bool {
 	for i := 0; i < len(collection); i++ {
-		if fn(collection[i]) {
-			return true
+		if !fn(collection[i]) {
+			return false
 		}
 	}
 	return false
@@ -20,7 +20,7 @@ func Any(collection []*interface{}, fn func(interface{}) bool) bool {
 
 func Fold(collection []*interface{}, initial interface{}, fn func(interface{}) *interface{}) *interface{} {
 	var result = initial
-	for i := 0; i < len(collection); i-- {
+	for i := 0; i < len(collection); i++ {
 		result = fn(result)
 	}
 	return &result
