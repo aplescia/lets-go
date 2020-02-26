@@ -2,26 +2,38 @@ package rest
 
 import (
 	"bytes"
-	"github.com/Chewy-Inc/lets-go/util"
 	"github.com/google/jsonapi"
-	"net/http"
 	"github.com/google/uuid"
-
+	"net/http"
+	"reflect"
 )
 
-var (
-	log, _ = util.InitLoggerWithLevel(nil)
-)
-
-func SerializeAsJsonApiResponse(someJsonApiStruct *interface{}) string {
+//Serializes the given struct pointer, or slice of struct pointers, as
+//a jsonapi document. Must be annotated with proper jsonapi annotations.
+//see: https://github.com/google/jsonapi#jsonapi-tag-reference for info on how to annotate your
+//structs.
+func SerializeAsJsonApiDocument(someJsonApiStruct interface{}) (string, error) {
 	var buf bytes.Buffer
 	err := jsonapi.MarshalPayload(&buf, someJsonApiStruct)
-	if err != nil {
-		log.Panicln(err)
-	}
-	return buf.String()
+	return buf.String(), err
 }
 
+//Given a JSON API document (json) as a byte slice, attempt to deserialize the data
+//into a json api conformant struct pointer. Returns any errors.
+func UnmarshalJsonApiDocument(documentJson []byte, inputStruct interface{}) error {
+	return jsonapi.UnmarshalPayload(bytes.NewReader(documentJson), inputStruct)
+}
+
+//Unmarshal a json api document that contains many payloads, returns a slice of structs that match
+//the type of the inputStruct. therefore, the inputStruct passed must be the same type as the struct
+//mapped to the JsonAPI payload.
+func UnmarshalManyJsonApiDocument(documentJson []byte, inputStruct interface{}) ([]interface{}, error) {
+	slice, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(documentJson), reflect.TypeOf(inputStruct))
+	return slice, err
+}
+
+//Given a status code and an error object, serializes a JSON:API conformant error
+//document.
 func JsonApiErrorResponse(statusCode int, err error) string {
 	randomUuid, _ := uuid.NewRandom()
 	httpStatus := http.StatusText(statusCode)
