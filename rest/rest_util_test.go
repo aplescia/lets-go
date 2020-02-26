@@ -61,11 +61,14 @@ func TestUnmarshalManyJsonApiDocument(t *testing.T) {
 	var objs []*MyTestStruct
 	objs = append(objs,testObj)
 	objs = append(objs,testObjTwo)
+	objs = append(objs,nil)
 	output, err := rest.SerializeAsJsonApiDocument(objs)
 	if err != nil {
 		t.Fatal(err)
 	}
+	t.Log(output)
 	res, err := rest.UnmarshalManyJsonApiDocument([]byte(output), testObjTwo)
+	t.Log(len(res))
 	resString, err := rest.SerializeAsJsonApiDocument(res)
 	t.Log(resString,err)
 }
