@@ -13,9 +13,30 @@ import (
 //see: https://github.com/google/jsonapi#jsonapi-tag-reference for info on how to annotate your
 //structs.
 func SerializeAsJsonApiDocument(someJsonApiStruct interface{}) (string, error) {
-	var buf bytes.Buffer
-	err := jsonapi.MarshalPayload(&buf, someJsonApiStruct)
-	return buf.String(), err
+	switch reflect.TypeOf(someJsonApiStruct).Kind(){
+	case reflect.Slice:
+		x := reflect.ValueOf(someJsonApiStruct)
+		var newSlice []interface{}
+		for i := 0; i < x.Len(); i++{
+			if !x.Index(i).IsZero() {
+				thing := x.Index(i).Elem()
+				if thing.Kind() == reflect.Struct {
+					newSlice = append(newSlice, thing.Addr().Interface())
+				} else if !thing.CanAddr() && thing.IsValid() && !thing.IsNil() {
+					if thing.Kind() == reflect.Ptr {
+						newSlice = append(newSlice, thing.Interface())
+					}
+				}
+			}
+		}
+		var buf bytes.Buffer
+		err := jsonapi.MarshalPayload(&buf, newSlice)
+		return buf.String(), err
+	default:
+		var buf bytes.Buffer
+		err := jsonapi.MarshalPayload(&buf, someJsonApiStruct)
+		return buf.String(), err
+	}
 }
 
 //Given a JSON API document (json) as a byte slice, attempt to deserialize the data
