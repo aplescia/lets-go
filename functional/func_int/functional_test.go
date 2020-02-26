@@ -1,4 +1,4 @@
-package int
+package func_int
 
 import (
 	"fmt"

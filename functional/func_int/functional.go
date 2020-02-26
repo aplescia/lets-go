@@ -1,4 +1,4 @@
-package int
+package func_int
 
 func All(collection []int, fn func(int) bool) bool {
 	for i := 0; i < len(collection); i++ {
@@ -140,7 +140,7 @@ func Reduce(collection []int, fn func(int, int) int) (result int) {
 	}
 	result = collection[0]
 	for i := 1; i < size; i++ {
-		result = fn(collection[i], result)
+		result = fn(result, collection[i])
 	}
 	return
 }
@@ -152,7 +152,7 @@ func ReduceR(collection []int, fn func(int, int) int) (result int) {
 	}
 	result = collection[size-1]
 	for i := size - 2; i >= 0; i-- {
-		result = fn(collection[i], result)
+		result = fn(result, collection[i])
 	}
 	return
 }
