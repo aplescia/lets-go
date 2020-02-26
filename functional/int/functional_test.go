@@ -17,7 +17,7 @@ func TestAll(t *testing.T) {
 	passing := []int{12, 25, 36, 56, 90, 99}
 	failing := []int{3, 5, 8, 12, 20, 32}
 
-	assert.True(t, _interface.All(passing, condition))
+	assert.True(t, All(passing, condition))
 	assert.False(t, All(failing, condition))
 	assert.True(t, All(empty, condition))
 }
