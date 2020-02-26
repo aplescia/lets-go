@@ -25,6 +25,7 @@ func Filter(collection []int, fn func(int) bool) []int {
 	for i := 0; i < len(collection); i++ {
 		if fn(collection[i]) {
 			mapped[filtered] = collection[i]
+			filtered++
 		}
 	}
 
@@ -38,6 +39,7 @@ func FilterNot(collection []int, fn func(int) bool) []int {
 	for i := 0; i < len(collection); i++ {
 		if !fn(collection[i]) {
 			mapped[filtered] = collection[i]
+			filtered++
 		}
 	}
 
@@ -49,27 +51,32 @@ func Flatten(collection [][]int) []int {
 	for i := 0; i < len(collection); i++ {
 		slots += len(collection[i])
 	}
+
 	flattened := make([]int, slots)
-	for i := 0; i < len(collection); i++ {
-		for j := 0; j < len(collection[i]); j++ {
-			flattened[i+j] = collection[i][j]
+
+	for i, cur := 0, 0; i < len(collection); i++ {
+		sizeOfCurrent := len(collection[i])
+		for j := 0; j < sizeOfCurrent; j++ {
+			flattened[cur+j] = collection[i][j]
 		}
+		cur += sizeOfCurrent
 	}
+
 	return flattened
 }
 
-func Fold(collection []int, initial int, fn func(int) int) (result int) {
+func Fold(collection []int, initial int, fn func(int, int) int) (result int) {
 	result = initial
 	for i := 0; i < len(collection); i++ {
-		result = fn(result)
+		result = fn(result, collection[i])
 	}
 	return
 }
 
-func FoldR(collection []int, initial int, fn func(int) int) (result int) {
+func FoldR(collection []int, initial int, fn func(int, int) int) (result int) {
 	result = initial
-	for i := len(collection); i >= 0; i-- {
-		result = fn(result)
+	for i := len(collection) - 1; i >= 0; i-- {
+		result = fn(result, collection[i])
 	}
 	return
 }
@@ -99,12 +106,13 @@ func Map(collection []int, fn func(int) int) []int {
 }
 
 func Max(collection []int) (max int) {
-	if len(collection) == 0 {
+	size := len(collection)
+	if size == 0 {
 		return
 	}
 	max = collection[0]
-	for i := 1; i < len(collection); i++ {
-		if max > collection[i] {
+	for i := 1; i < size; i++ {
+		if max < collection[i] {
 			max = collection[i]
 		}
 	}
@@ -112,38 +120,39 @@ func Max(collection []int) (max int) {
 }
 
 func Min(collection []int) (min int) {
-	if len(collection) == 0 {
+	size := len(collection)
+	if size == 0 {
 		return
 	}
 	min = collection[0]
-	for i := 1; i < len(collection); i++ {
-		if min < collection[i] {
+	for i := 1; i < size; i++ {
+		if min > collection[i] {
 			min = collection[i]
 		}
 	}
 	return
 }
 
-func Reduce(collection []int, fn func(int) int) (result int) {
+func Reduce(collection []int, fn func(int, int) int) (result int) {
 	size := len(collection)
 	if size == 0 {
 		return
 	}
 	result = collection[0]
 	for i := 1; i < size; i++ {
-		result = fn(collection[i-1])
+		result = fn(collection[i], result)
 	}
 	return
 }
 
-func ReduceR(collection []int, fn func(int) int) (result int) {
+func ReduceR(collection []int, fn func(int, int) int) (result int) {
 	size := len(collection)
 	if size == 0 {
 		return
 	}
 	result = collection[size-1]
 	for i := size - 2; i >= 0; i-- {
-		result = fn(collection[i+1])
+		result = fn(collection[i], result)
 	}
 	return
 }
