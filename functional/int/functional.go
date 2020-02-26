@@ -54,12 +54,12 @@ func Flatten(collection [][]int) []int {
 
 	flattened := make([]int, slots)
 
-	for i, cur := 0, 0; i < len(collection); i++ {
+	for i, startingIndex := 0, 0; i < len(collection); i++ {
 		sizeOfCurrent := len(collection[i])
 		for j := 0; j < sizeOfCurrent; j++ {
-			flattened[cur+j] = collection[i][j]
+			flattened[startingIndex+j] = collection[i][j]
 		}
-		cur += sizeOfCurrent
+		startingIndex += sizeOfCurrent
 	}
 
 	return flattened
