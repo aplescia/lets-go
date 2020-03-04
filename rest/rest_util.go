@@ -2,6 +2,7 @@ package rest
 
 import (
 	"bytes"
+	"encoding/json"
 	"github.com/google/jsonapi"
 	"github.com/google/uuid"
 	"net/http"
@@ -71,4 +72,26 @@ func JsonApiErrorResponse(statusCode int, err error) string {
 	errs = append(errs, obj)
 	_ = jsonapi.MarshalErrors(&buf, errs)
 	return buf.String()
+}
+
+//Marshal a struct as a jsonString. Returns any errors.
+func MarshalAsJsonString(someInput interface{}) (string,error) {
+	result, err := json.Marshal(someInput)
+	return string(result),err
+}
+
+//Unmarshal a JSON String into a passed struct. You should be passing in a pointer.
+//Returns any errors.
+//For example:
+//	var structToBePopulated MyStruct
+//	rest.UnmarshalJsonString(jsonString, &structToBePopulated)
+//or
+//	var structToBePopulated *MyStruct
+//	rest.UnmarshalJsonString(jsonString, structToBePopulated)
+func UnmarshalJsonString(someString string, object interface{}) error {
+	if object == nil {
+		panic("Object is nil!")
+	}
+	err := json.Unmarshal([]byte(someString), &object)
+	return err
 }
