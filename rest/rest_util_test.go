@@ -79,3 +79,21 @@ func TestJsonApiErrorResponse(t *testing.T) {
 	t.Log(res)
 	assert.NotEmpty(t,res)
 }
+
+func TestMarshalling(t *testing.T){
+	testObj := &MyTestStruct{
+		ID: "10",
+		Name: "bob",
+	}
+	output, err := rest.MarshalAsJsonString(testObj)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(output)
+	var thingy MyTestStruct
+	err = rest.UnmarshalJsonString(output, &thingy)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(thingy)
+}
