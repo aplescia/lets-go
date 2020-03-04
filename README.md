@@ -1,6 +1,6 @@
 # Let's Go
 
-A module with some useful packages for anyone developing Golang applications. 
+A module with some useful packages for anyone developing Golang applications on the cloud. 
 ---
 Packages include:
 
