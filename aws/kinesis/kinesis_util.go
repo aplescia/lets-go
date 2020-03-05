@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	currentRegion = util.GetEnv("AWS_REGION", "us-east-1")
+	currentRegion = util.GetEnvOrDefault("AWS_REGION", "us-east-1")
 	log, _ = util.InitLoggerWithLevel(nil)
 )
 

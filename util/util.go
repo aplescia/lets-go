@@ -1,39 +1,38 @@
 package util
 
 import (
+	"errors"
 	log "github.com/sirupsen/logrus"
 	"os"
-	"strings"
+	"path/filepath"
 	"time"
 )
 
 //Get an environment variable value by key or return some default value.
-func GetEnv(key, fallback string) string {
+func GetEnvOrDefault(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		return value
 	}
 	return fallback
 }
 
-//Return the final element of a path of the root.
+//Return the final element of a path of the root. Makes use of the filepath library.
 //Example path: /this/is/my/path returns path.
 func GetFinalElementOfPath(inputPath string) string {
-	var pathMembers = strings.Split(inputPath, "/")
-	return pathMembers[len(pathMembers)-1]
+	return filepath.Base(inputPath)
 }
 
-//Parse a time string in RFC3339Nano format as either a go time.Time object or nil.
+//Parse a time string in the given format as either a go time.Time object or nil.
 //Example format: "2009-01-02T01:02:32.111Z"
-func ParseTimeStringAsTimeOrNil(timeString *string) *time.Time {
-	if timeString == nil || *timeString == "" {
-		return nil
+func ParseTimeStringAsTimeOrNil(timeString string, layout string) (*time.Time,error) {
+	if timeString == "" || layout == "" {
+		return nil, errors.New("time input, or layout, were empty strings")
 	}
-	t, err := time.Parse(time.RFC3339Nano, *timeString)
+	t, err := time.Parse(layout, timeString)
 	if err != nil {
-		log.Error("Could not parse time")
-		return nil
+		return nil, err
 	}
-	return &t
+	return &t, err
 }
 
 //Creates a pointer to a logrus object. The logger defaults to the DEBUG level unless another logging
@@ -43,7 +42,7 @@ func InitLoggerWithLevel(level *log.Level) (*log.Logger,error) {
 	logger := log.New()
 	logger.SetOutput(os.Stdout)
 	if level == nil {
-		loggingLevelFromEnv := GetEnv("LOG_LEVEL", log.DebugLevel.String())
+		loggingLevelFromEnv := GetEnvOrDefault("LOG_LEVEL", log.DebugLevel.String())
 		level, err := log.ParseLevel(loggingLevelFromEnv)
 		if err != nil {
 			log.Error("Couldn't instantiate logger with custom level! Returning logger because : ", err)

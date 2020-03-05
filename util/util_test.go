@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"
+	"time"
 )
 
 func TestGetFinalElementOfPath(t *testing.T) {
@@ -16,17 +17,26 @@ func TestGetFinalElementOfPath(t *testing.T) {
 
 func TestParseTimeStringAsTimeOrNil(t *testing.T) {
 	timeString := "1994-09-19T09:00:00.312Z"
-	result := util.ParseTimeStringAsTimeOrNil(&timeString)
+	result, err := util.ParseTimeStringAsTimeOrNil(timeString, time.RFC3339Nano)
+	if err != nil {
+		t.Fatal(err)
+	}
 	assert.NotNil(t, result)
 	assert.Equal(t, 1994, result.Year())
 	assert.Equal(t, "September", result.Month().String())
 	assert.Equal(t, 19, result.Day())
 	assert.Equal(t, 312, result.Nanosecond()/1_000_000)
 	timeString = "hey, bobby!"
-	result = util.ParseTimeStringAsTimeOrNil(&timeString)
+	result, err = util.ParseTimeStringAsTimeOrNil(timeString, time.RFC3339Nano)
+	if err == nil {
+		t.Fatal(err)
+	}
 	assert.Nil(t, result)
 	timeString = "1994-09-19T09:00:00Z"
-	result = util.ParseTimeStringAsTimeOrNil(&timeString)
+	result, err = util.ParseTimeStringAsTimeOrNil(timeString, time.RFC3339Nano)
+	if err != nil {
+		t.Fatal(err)
+	}
 	assert.NotNil(t, result)
 }
 
