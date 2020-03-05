@@ -14,7 +14,7 @@ var (
 //variable.
 func ClusterClient() *redis.ClusterClient {
 
-	clusterURL := util.GetEnv("REDIS_HOST", "127.0.0.1:7000")
+	clusterURL := util.GetEnvOrDefault("REDIS_HOST", "127.0.0.1:7000")
 	log.Debug("INIT REDIS CONNECT")
 	clusterClient := redis.NewClusterClient(&redis.ClusterOptions{
 		Addrs: []string{clusterURL},

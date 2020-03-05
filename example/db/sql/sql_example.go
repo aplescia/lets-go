@@ -9,7 +9,7 @@ import (
 )
 
 var(
-	thing, _ = sql.OpenConnection("postgresql://localhost:5432/denver_replica?sslmode=disable")
+	thing, _ = sql.OpenPostgresConnection("postgresql://localhost:5432/denver_replica?sslmode=disable")
 )
 
 func main() {
