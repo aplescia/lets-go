@@ -25,6 +25,8 @@ func OpenPostgresConnection(connString string) (*gorm.DB, error) {
 	return conn, err
 }
 
+//Use a given DB connection to query all of type desiredStruct from the database.
+//Expects a slice.
 func QueryAllFromDatabase(db *gorm.DB, desiredStruct interface{}){
 	if nil == desiredStruct {
 		return
@@ -32,7 +34,6 @@ func QueryAllFromDatabase(db *gorm.DB, desiredStruct interface{}){
 	if reflect.TypeOf(desiredStruct).Kind() == reflect.Struct {
 		db.Find(&desiredStruct)
 	} else if reflect.TypeOf(desiredStruct).Kind() == reflect.Ptr {
-		log.Debug("It's a ptr!")
 		db.Find(desiredStruct)
 	}
 }
@@ -47,7 +48,6 @@ func InsertIntoDatabase(db *gorm.DB, ptrToInsert interface{}) error {
 		db.AutoMigrate(&ptrToInsert)
 		db.Create(&ptrToInsert)
 	} else if reflect.TypeOf(ptrToInsert).Kind() == reflect.Ptr {
-		log.Debug("It's a ptr!")
 		db.AutoMigrate(ptrToInsert)
 		db.Create(ptrToInsert)
 	} else {
