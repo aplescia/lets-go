@@ -5,10 +5,13 @@ A module with some useful packages for anyone developing Golang applications on 
 Packages include:
 
 * **util** -- a generic utility package
+* **rest** -- useful REST utilities. Primary deals with unmarshalling and marshalling JSON, as well as 
+support for serializing/deserializing structs according to the JSON:API schema.
 * **redis** -- a package that provides utilities relevant to connecting with and interacting with a 
-Redis cluster.
+Redis cluster. This is a common use case for AWS Elasticache.
+* **functional** -- useful functional utilities for primitive types.
 * **sql** -- a package that provides utilities relevant to connecting to and 
-interacting with a Postgres database.
+interacting with a Postgres database. Makes use of the GORM library found [here](https://github.com/jinzhu/gorm).
 * **alb** -- a package that helps format responses to be sent from an AWS Lambda function back to a
  triggering ALB, and
 therefore back to a client.
