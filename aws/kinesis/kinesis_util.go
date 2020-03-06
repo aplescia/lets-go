@@ -8,7 +8,6 @@ import (
 )
 
 var (
-	currentRegion = util.GetEnvOrDefault("AWS_REGION", "us-east-1")
 	log, _ = util.InitLoggerWithLevel(nil)
 )
 
@@ -21,29 +20,26 @@ func PutToKinesis(streamName string, streamRegion string, input string) (bool, e
 	}
 	kc := kinesis.New(s)
 	streamNameConv := aws.String(streamName)
-	testPut, err := kc.PutRecord(&kinesis.PutRecordInput{
+	_, err = kc.PutRecord(&kinesis.PutRecordInput{
 		Data:         []byte(input),
 		StreamName:   streamNameConv,
 		PartitionKey: aws.String("key1"),
 	})
 	if err != nil {
-		log.Error("Record was not put successfully", err)
+		log.Error("record was not put successfully", err)
 		return false, err
-	} else {
-		log.Info("Put Record successful", testPut.GoString())
-		return true, nil
 	}
+	return true, nil
 }
 
 func PutManyRecordsToKinesis(streamName string, streamRegion string, inputs []string) (bool,error) {
 	s, err := session.NewSession(&aws.Config{
-		Region: aws.String(streamRegion),
+		Region: &streamRegion,
 	})
 	if err != nil {
 		panic(err)
 	}
 	kc := kinesis.New(s)
-	streamNameConv := aws.String(streamName)
 	var input []*kinesis.PutRecordsRequestEntry
 	for _, i := range inputs {
 		var entry = &kinesis.PutRecordsRequestEntry{
@@ -52,15 +48,13 @@ func PutManyRecordsToKinesis(streamName string, streamRegion string, inputs []st
 		}
 		input = append(input, entry)
 	}
-	testPut, err := kc.PutRecords(&kinesis.PutRecordsInput{
+	_, err = kc.PutRecords(&kinesis.PutRecordsInput{
 		Records:    input,
-		StreamName: streamNameConv,
+		StreamName: &streamName,
 	})
 	if err != nil {
-		log.Println("Records were not put successfully", err)
+		log.Println("records were not put successfully", err)
 		return false, err
-	} else {
-		log.Debug("Put Records successful", testPut.GoString())
-		return true, nil
 	}
+	return true, nil
 }

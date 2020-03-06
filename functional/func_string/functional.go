@@ -65,12 +65,11 @@ func Flatten(collection [][]string) []string {
 	return flattened
 }
 
-func Fold(collection []string, initial string, fn func(string, string) string) (result string) {
-	result = initial
-	for i := 0; i < len(collection); i++ {
-		result = fn(result, collection[i])
+func Fold(collection []string, initial string, fn func(string, string) string) string {
+	for _, elem := range collection {
+		initial = fn(initial, elem)
 	}
-	return
+	return initial
 }
 
 func FoldR(collection []string, initial string, fn func(string, string) string) (result string) {
@@ -82,8 +81,8 @@ func FoldR(collection []string, initial string, fn func(string, string) string) 
 }
 
 func ForEach(collection []string, fn func(string)) {
-	for i := 0; i < len(collection); i++ {
-		fn(collection[i])
+	for _, elem := range collection {
+		fn(elem)
 	}
 }
 

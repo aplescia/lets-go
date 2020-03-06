@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	response, _ := alb.LambdaResponse(200, "OK!")
+	response, _ := alb.LambdaToALBResponse(200, "OK!")
 	jsonString, _ := json.Marshal(response)
 	fmt.Println(string(jsonString))
 }
