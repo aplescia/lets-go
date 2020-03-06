@@ -4,12 +4,12 @@ package main
 
 import (
 	"fmt"
-	"github.com/Chewy-Inc/lets-go/db/sql"
+	"github.com/Chewy-Inc/lets-go/db/sql/postgres"
 	log "github.com/sirupsen/logrus"
 )
 
 var(
-	thing, _ = sql.OpenPostgresConnection("postgresql://localhost:5432/denver_replica?sslmode=disable")
+	thing, _ = postgres.OpenPostgresConnection("postgresql://localhost:5432/denver_replica?sslmode=disable")
 )
 
 func main() {

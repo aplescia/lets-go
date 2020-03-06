@@ -8,11 +8,11 @@ import (
 )
 
 var (
-	client = redis.ClusterClient()
+	clientPtr = redis.ClusterClient()
 )
 
 func main() {
-	result := client.Ping()
+	result := clientPtr.Ping()
 	fmt.Print(result)
-	client.Set("name","Bob Ross", 0)
+	clientPtr.Set("name","Bob Ross", 0)
 }

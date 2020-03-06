@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func LambdaResponse(statuscode int, body string) (events.ALBTargetGroupResponse, error) {
+func LambdaToALBResponse(statuscode int, body string) (events.ALBTargetGroupResponse, error) {
 	var returnPayload events.ALBTargetGroupResponse
 	returnPayload.Body = body
 	returnPayload.StatusCode = statuscode
@@ -18,9 +18,9 @@ func LambdaResponse(statuscode int, body string) (events.ALBTargetGroupResponse,
 }
 
 func NotFoundResponse() (events.ALBTargetGroupResponse, error) {
-	return LambdaResponse(404, "")
+	return LambdaToALBResponse(404, "")
 }
 
 func InternalServerError(err error) (events.ALBTargetGroupResponse, error) {
-	return LambdaResponse(500, err.Error())
+	return LambdaToALBResponse(500, err.Error())
 }
