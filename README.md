@@ -2,6 +2,8 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/Chewy-Inc/lets-go)](https://goreportcard.com/report/github.com/Chewy-Inc/lets-go)
 
+[GoDoc](https://pkg.go.dev/github.com/Chewy-Inc/lets-go)
+
 A module with some useful packages for anyone developing Golang applications on the cloud. 
 ---
 Packages include:
