@@ -14,11 +14,11 @@ import (
 //see: https://github.com/google/jsonapi#jsonapi-tag-reference for info on how to annotate your
 //structs.
 func SerializeAsJsonApiDocument(someJsonApiStruct interface{}) (string, error) {
-	switch reflect.TypeOf(someJsonApiStruct).Kind(){
+	switch reflect.TypeOf(someJsonApiStruct).Kind() {
 	case reflect.Slice:
 		x := reflect.ValueOf(someJsonApiStruct)
 		var newSlice []interface{}
-		for i := 0; i < x.Len(); i++{
+		for i := 0; i < x.Len(); i++ {
 			if !x.Index(i).IsZero() {
 				thing := x.Index(i).Elem()
 				if thing.Kind() == reflect.Struct {
@@ -75,9 +75,9 @@ func JsonApiErrorResponse(statusCode int, err error) string {
 }
 
 //Marshal a struct as a jsonString. Returns any errors.
-func MarshalAsJsonString(someInput interface{}) (string,error) {
+func MarshalAsJsonString(someInput interface{}) (string, error) {
 	result, err := json.Marshal(someInput)
-	return string(result),err
+	return string(result), err
 }
 
 //Unmarshal a JSON String into a passed struct. You should be passing in a pointer.

@@ -14,5 +14,5 @@ var (
 func main() {
 	result := clientPtr.Ping()
 	fmt.Print(result)
-	clientPtr.Set("name","Bob Ross", 0)
+	clientPtr.Set("name", "Bob Ross", 0)
 }

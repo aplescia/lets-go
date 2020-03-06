@@ -27,7 +27,7 @@ func OpenPostgresConnection(connString string) (*gorm.DB, error) {
 
 //Use a given DB connection to query all of type desiredStruct from the database.
 //Expects a slice.
-func QueryAllFromDatabase(db *gorm.DB, desiredStruct interface{}){
+func QueryAllFromDatabase(db *gorm.DB, desiredStruct interface{}) {
 	if nil == desiredStruct {
 		return
 	}

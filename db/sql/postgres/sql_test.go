@@ -7,8 +7,8 @@ import (
 	"testing"
 )
 
-type MyDummyStruct struct{
-	ID int `gorm:"default:'0'"`
+type MyDummyStruct struct {
+	ID   int `gorm:"default:'0'"`
 	Name string
 }
 
@@ -22,7 +22,7 @@ func TestQueryAllFromDatabase(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	_ = postgres.InsertIntoDatabase(conn, &MyDummyStruct{ Name: "Ptr"})
+	_ = postgres.InsertIntoDatabase(conn, &MyDummyStruct{Name: "Ptr"})
 	_ = postgres.InsertIntoDatabase(conn, NewDummyStruct("Bobby"))
 	bobert := MyDummyStruct{Name: "Hey!"}
 	err = postgres.InsertIntoDatabase(conn, bobert)

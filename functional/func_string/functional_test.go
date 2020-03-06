@@ -47,7 +47,7 @@ func TestFilter(t *testing.T) {
 	assert.Equal(t, 2, len(filtered))
 	assert.EqualValues(t, filtered, []string{"Things", "Should"})
 
-	assert.Equal(t,0, len(func_string.Filter(empty, condition)))
+	assert.Equal(t, 0, len(func_string.Filter(empty, condition)))
 }
 
 func TestFilterNot(t *testing.T) {
@@ -62,7 +62,7 @@ func TestFilterNot(t *testing.T) {
 	assert.Equal(t, 3, len(filtered))
 	assert.EqualValues(t, []string{"As", "All", "be"}, filtered)
 
-	assert.Equal(t,0, len(func_string.FilterNot(empty, condition)))
+	assert.Equal(t, 0, len(func_string.FilterNot(empty, condition)))
 }
 
 func TestFlatten(t *testing.T) {
@@ -95,14 +95,14 @@ func TestFoldR(t *testing.T) {
 
 	sliceToFold := []string{"As", "All", "Things", "Should", "Be"}
 
-	assert.Equal(t,"We Be Should Things All As", func_string.FoldR(sliceToFold, "We", foldFn))
+	assert.Equal(t, "We Be Should Things All As", func_string.FoldR(sliceToFold, "We", foldFn))
 	assert.Equal(t, "", func_string.FoldR(empty, "", foldFn))
 }
 
 func TestForEach(t *testing.T) {
 	sliceToPrint := []string{"As", "All", "Things", "Should", "Be"}
 
-	func_string.ForEach(sliceToPrint, func(x string){fmt.Println(x)})
+	func_string.ForEach(sliceToPrint, func(x string) { fmt.Println(x) })
 }
 
 func TestIndexOf(t *testing.T) {
@@ -130,7 +130,7 @@ func TestReduce(t *testing.T) {
 
 	sliceToFold := []string{"As", "All", "Things", "Should", "Be"}
 
-	assert.Equal(t, func_string.Reduce(sliceToFold,  foldFn), "As All Things Should Be")
+	assert.Equal(t, func_string.Reduce(sliceToFold, foldFn), "As All Things Should Be")
 	assert.Equal(t, func_string.Reduce(empty, foldFn), "")
 
 }
@@ -143,5 +143,5 @@ func TestReduceR(t *testing.T) {
 	sliceToFold := []string{"As", "All", "Things", "Should", "Be"}
 
 	assert.Equal(t, func_string.ReduceR(sliceToFold, foldFn), "Be Should Things All As")
-	assert.Equal(t, func_string.ReduceR(empty,  foldFn), "")
+	assert.Equal(t, func_string.ReduceR(empty, foldFn), "")
 }

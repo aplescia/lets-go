@@ -8,7 +8,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-var(
+var (
 	thing, _ = postgres.OpenPostgresConnection("postgresql://localhost:5432/denver_replica?sslmode=disable")
 )
 
@@ -18,7 +18,7 @@ func main() {
 		log.Error(err)
 	}
 	defer rows.Close()
-	for rows.Next(){
+	for rows.Next() {
 		fmt.Println(rows)
 	}
 }
