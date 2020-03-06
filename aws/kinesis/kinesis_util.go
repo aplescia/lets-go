@@ -32,7 +32,7 @@ func PutToKinesis(streamName string, streamRegion string, input string) (bool, e
 	return true, nil
 }
 
-func PutManyRecordsToKinesis(streamName string, streamRegion string, inputs []string) (bool,error) {
+func PutManyRecordsToKinesis(streamName string, streamRegion string, inputs []string) (bool, error) {
 	s, err := session.NewSession(&aws.Config{
 		Region: &streamRegion,
 	})
@@ -43,8 +43,8 @@ func PutManyRecordsToKinesis(streamName string, streamRegion string, inputs []st
 	var input []*kinesis.PutRecordsRequestEntry
 	for _, i := range inputs {
 		var entry = &kinesis.PutRecordsRequestEntry{
-			Data:            []byte(i),
-			PartitionKey:    aws.String("key1"),
+			Data:         []byte(i),
+			PartitionKey: aws.String("key1"),
 		}
 		input = append(input, entry)
 	}

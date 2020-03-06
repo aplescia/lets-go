@@ -8,7 +8,7 @@ import (
 )
 
 type MyTestStruct struct {
-	ID string `jsonapi:"primary,MyTestStruct"`
+	ID   string `jsonapi:"primary,MyTestStruct"`
 	Name string `jsonapi:"attr,name"`
 }
 
@@ -19,7 +19,7 @@ type MyBadStruct struct {
 
 func TestSerializeAsJsonApiResponse(t *testing.T) {
 	testObj := &MyTestStruct{
-		ID: "10",
+		ID:   "10",
 		Name: "bob",
 	}
 	output, err := rest.SerializeAsJsonApiDocument(testObj)
@@ -28,7 +28,7 @@ func TestSerializeAsJsonApiResponse(t *testing.T) {
 		Name: "",
 		Code: 0,
 	})
-	t.Log(output,err)
+	t.Log(output, err)
 	output, err = rest.SerializeAsJsonApiDocument("hello")
 	assert.NotNil(t, err)
 	t.Log(output, err)
@@ -36,7 +36,7 @@ func TestSerializeAsJsonApiResponse(t *testing.T) {
 
 func TestUnmarshalJsonApiDocument(t *testing.T) {
 	testObj := &MyTestStruct{
-		ID: "10",
+		ID:   "10",
 		Name: "bob",
 	}
 	output, _ := rest.SerializeAsJsonApiDocument(testObj)
@@ -51,17 +51,17 @@ func TestUnmarshalJsonApiDocument(t *testing.T) {
 
 func TestUnmarshalManyJsonApiDocument(t *testing.T) {
 	testObj := &MyTestStruct{
-		ID: "10",
+		ID:   "10",
 		Name: "bob",
 	}
 	testObjTwo := &MyTestStruct{
-		ID: "11",
+		ID:   "11",
 		Name: "bobby",
 	}
 	var objs []*MyTestStruct
-	objs = append(objs,testObj)
-	objs = append(objs,testObjTwo)
-	objs = append(objs,nil)
+	objs = append(objs, testObj)
+	objs = append(objs, testObjTwo)
+	objs = append(objs, nil)
 	output, err := rest.SerializeAsJsonApiDocument(objs)
 	if err != nil {
 		t.Fatal(err)
@@ -70,19 +70,19 @@ func TestUnmarshalManyJsonApiDocument(t *testing.T) {
 	res, err := rest.UnmarshalManyJsonApiDocument([]byte(output), testObjTwo)
 	t.Log(len(res))
 	resString, err := rest.SerializeAsJsonApiDocument(res)
-	t.Log(resString,err)
+	t.Log(resString, err)
 }
 
 func TestJsonApiErrorResponse(t *testing.T) {
 	err := errors.New("This is my test Error")
 	res := rest.JsonApiErrorResponse(500, err)
 	t.Log(res)
-	assert.NotEmpty(t,res)
+	assert.NotEmpty(t, res)
 }
 
-func TestMarshalling(t *testing.T){
+func TestMarshalling(t *testing.T) {
 	testObj := &MyTestStruct{
-		ID: "10",
+		ID:   "10",
 		Name: "bob",
 	}
 	output, err := rest.MarshalAsJsonString(testObj)

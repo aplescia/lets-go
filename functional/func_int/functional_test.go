@@ -71,12 +71,12 @@ func TestFilterNot(t *testing.T) {
 
 func TestFlatten(t *testing.T) {
 	slice1 := []int{1, 2, 3, 4, 5}
-	slice2 := []int{6, 7, 8, 9 ,10}
+	slice2 := []int{6, 7, 8, 9, 10}
 	slice3 := []int{11, 12, 13, 14, 15}
 
 	matrix := [][]int{slice1, slice2, slice3}
 
-	assert.EqualValues(t, []int{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}, func_int.Flatten(matrix))
+	assert.EqualValues(t, []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, func_int.Flatten(matrix))
 	assert.Equal(t, len(empty), len(func_int.Flatten([][]int{empty})))
 }
 
@@ -105,7 +105,7 @@ func TestFoldR(t *testing.T) {
 func TestForEach(t *testing.T) {
 	sliceToPrint := []int{10, 20, 30, 40, 50}
 
-	func_int.ForEach(sliceToPrint, func(x int){fmt.Println(x)})
+	func_int.ForEach(sliceToPrint, func(x int) { fmt.Println(x) })
 }
 
 func TestIndexOf(t *testing.T) {

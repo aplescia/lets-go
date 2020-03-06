@@ -24,7 +24,7 @@ func GetFinalElementOfPath(inputPath string) string {
 
 //Parse a time string in the given format as either a go time.Time object or nil.
 //Example format: "2009-01-02T01:02:32.111Z"
-func ParseTimeStringAsTimeOrNil(timeString string, layout string) (*time.Time,error) {
+func ParseTimeStringAsTimeOrNil(timeString string, layout string) (*time.Time, error) {
 	if timeString == "" || layout == "" {
 		return nil, errors.New("time input, or layout, were empty strings")
 	}
@@ -38,7 +38,7 @@ func ParseTimeStringAsTimeOrNil(timeString string, layout string) (*time.Time,er
 //Creates a pointer to a logrus object. The logger defaults to the DEBUG level unless another logging
 //level is passed as a function argument, or is specified under the environment variable LOG_LEVEL.
 //the logger is configured to log to stdout. Returns an error if any.
-func InitLoggerWithLevel(level *log.Level) (*log.Logger,error) {
+func InitLoggerWithLevel(level *log.Level) (*log.Logger, error) {
 	logger := log.New()
 	logger.SetOutput(os.Stdout)
 	if level == nil {
