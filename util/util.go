@@ -22,7 +22,7 @@ func GetFinalElementOfPath(inputPath string) string {
 	return filepath.Base(inputPath)
 }
 
-//Parse a time string in the given format as either a go time.Time object or nil.
+//ParseTimeStringAsTimeOrNil parses a time string in the given format as either a go time.Time object or nil.
 //Example format: "2009-01-02T01:02:32.111Z"
 func ParseTimeStringAsTimeOrNil(timeString string, layout string) (*time.Time, error) {
 	if timeString == "" || layout == "" {

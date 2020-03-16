@@ -5,6 +5,8 @@ import (
 	"net/http"
 )
 
+//LambdaToALBResponse creates an AWS ALB compatible response payload dependent on a given
+//status code and body message. Returns any errors.
 func LambdaToALBResponse(statuscode int, body string) (events.ALBTargetGroupResponse, error) {
 	var returnPayload events.ALBTargetGroupResponse
 	returnPayload.Body = body
@@ -17,10 +19,12 @@ func LambdaToALBResponse(statuscode int, body string) (events.ALBTargetGroupResp
 	return returnPayload, nil
 }
 
+//NotFoundResponse creates an AWS ALB compatible Not Found payload with an empty body. Returns any errors.
 func NotFoundResponse() (events.ALBTargetGroupResponse, error) {
 	return LambdaToALBResponse(404, "")
 }
 
+//NotFoundResponse creates an AWS ALB compatible Internal Server Error payload given a Go error object. Returns any errors.
 func InternalServerError(err error) (events.ALBTargetGroupResponse, error) {
 	return LambdaToALBResponse(500, err.Error())
 }
