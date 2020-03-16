@@ -11,7 +11,7 @@ var (
 	log, _ = util.InitLoggerWithLevel(nil)
 )
 
-//Retrieve a secret from Secrets Manager. Searches for a secret stored under the input
+//GetSecret retrieves a secret from Secrets Manager. Searches for a secret stored under the input
 //	secretId
 func GetSecret(secretId string) string {
 	sess, err := session.NewSession(&aws.Config{
@@ -28,7 +28,7 @@ func GetSecret(secretId string) string {
 	return *output.SecretString
 }
 
-//Create a Secrets Manager secret using a given CreateSecretInput. Return errors, if any.
+//CreateSecret creates a Secrets Manager secret using a given CreateSecretInput. Return errors, if any.
 func CreateSecret(opts secretsmanager.CreateSecretInput) error {
 	sess, err := session.NewSession(&aws.Config{
 		Region: aws.String(util.GetEnvOrDefault("AWS_REGION", "us-east-1")),
@@ -43,6 +43,3 @@ func CreateSecret(opts secretsmanager.CreateSecretInput) error {
 	}
 	return err
 }
-
-
-

@@ -13,7 +13,7 @@ var (
 	log, _ = util.InitLoggerWithLevel(nil)
 )
 
-//Downloads a file from an S3 event's S3 Event Record. Takes in a pointer to a downloader object.
+//DownloadFileFromS3EventRecord downloads a file from an S3 event's S3 Event Record. Takes in a pointer to a downloader object.
 //		for _, eventObject := range event.Records {
 //		file, err := s3.DownloadFileFromS3EventRecord(downloader, eventObject)
 //		if err != nil {
