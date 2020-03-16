@@ -47,9 +47,8 @@ func InitLoggerWithLevel(level *log.Level) (*log.Logger, error) {
 		if err != nil {
 			log.Error("Couldn't instantiate logger with custom level! Returning logger because : ", err)
 			return logger, err
-		} else {
-			logger.SetLevel(level)
 		}
+		logger.SetLevel(level)
 	} else {
 		logger.SetLevel(*level)
 	}

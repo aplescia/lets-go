@@ -24,7 +24,7 @@ func NotFoundResponse() (events.ALBTargetGroupResponse, error) {
 	return LambdaToALBResponse(404, "")
 }
 
-//NotFoundResponse creates an AWS ALB compatible Internal Server Error payload given a Go error object. Returns any errors.
+//InternalServerError creates an AWS ALB compatible Internal Server Error payload given a Go error object. Returns any errors.
 func InternalServerError(err error) (events.ALBTargetGroupResponse, error) {
 	return LambdaToALBResponse(500, err.Error())
 }
