@@ -9,7 +9,7 @@ import (
 	"reflect"
 )
 
-//Serializes the given struct pointer, or slice of struct pointers, as
+//SerializeAsJsonApiDocument serializes the given struct pointer, or slice of struct pointers, as
 //a jsonapi document. Must be annotated with proper jsonapi annotations.
 //see: https://github.com/google/jsonapi#jsonapi-tag-reference for info on how to annotate your
 //structs.
@@ -40,13 +40,13 @@ func SerializeAsJsonApiDocument(someJsonApiStruct interface{}) (string, error) {
 	}
 }
 
-//Given a JSON API document (json) as a byte slice, attempt to deserialize the data
+//UnmarshalJsonApiDocument takes a JSON API document (json) as a byte slice and attempts to deserialize the data
 //into a json api conformant struct pointer. Returns any errors.
 func UnmarshalJsonApiDocument(documentJson []byte, inputStruct interface{}) error {
 	return jsonapi.UnmarshalPayload(bytes.NewReader(documentJson), inputStruct)
 }
 
-//Unmarshal a json api document that contains many payloads, returns a slice of structs that match
+//UnmarshalManyJsonApiDocument unmarshals a json api document that contains many payloads and returns a slice of structs that match
 //the type of the inputStruct. therefore, the inputStruct passed must be the same type as the struct
 //mapped to the JsonAPI payload.
 func UnmarshalManyJsonApiDocument(documentJson []byte, inputStruct interface{}) ([]interface{}, error) {
@@ -54,7 +54,7 @@ func UnmarshalManyJsonApiDocument(documentJson []byte, inputStruct interface{}) 
 	return slice, err
 }
 
-//Given a status code and an error object, serializes a JSON:API conformant error
+//JsonApiErrorResponse takes a status code and an error object and serializes a JSON:API conformant error
 //document.
 func JsonApiErrorResponse(statusCode int, err error) string {
 	randomUuid, _ := uuid.NewRandom()
@@ -74,13 +74,13 @@ func JsonApiErrorResponse(statusCode int, err error) string {
 	return buf.String()
 }
 
-//Marshal a struct as a jsonString. Returns any errors.
+//MarshalAsJsonString marshals a struct as a jsonString. Returns any errors.
 func MarshalAsJsonString(someInput interface{}) (string, error) {
 	result, err := json.Marshal(someInput)
 	return string(result), err
 }
 
-//Unmarshal a JSON String into a passed struct. You should be passing in a pointer.
+//UnmarshalJsonString unmarshals a JSON String into a passed struct. You should be passing in a pointer.
 //Returns any errors.
 //For example:
 //	var structToBePopulated MyStruct
