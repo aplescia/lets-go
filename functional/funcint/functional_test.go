@@ -1,8 +1,8 @@
-package func_int_test
+package funcint_test
 
 import (
 	"fmt"
-	"github.com/Chewy-Inc/lets-go/functional/func_int"
+	"github.com/Chewy-Inc/lets-go/functional/funcint"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -18,9 +18,9 @@ func TestAll(t *testing.T) {
 	passing := []int{12, 25, 36, 56, 90, 99}
 	failing := []int{3, 5, 8, 12, 20, 32}
 
-	assert.True(t, func_int.All(passing, condition))
-	assert.False(t, func_int.All(failing, condition))
-	assert.True(t, func_int.All(empty, condition))
+	assert.True(t, funcint.All(passing, condition))
+	assert.False(t, funcint.All(failing, condition))
+	assert.True(t, funcint.All(empty, condition))
 }
 
 func TestAny(t *testing.T) {
@@ -32,9 +32,9 @@ func TestAny(t *testing.T) {
 	passing := []int{12, 25, 36, 56, 90, 99}
 	failing := []int{3, 5, 8, 9, 0, 2}
 
-	assert.True(t, func_int.Any(passing, condition))
-	assert.False(t, func_int.Any(failing, condition))
-	assert.False(t, func_int.Any(empty, condition))
+	assert.True(t, funcint.Any(passing, condition))
+	assert.False(t, funcint.Any(failing, condition))
+	assert.False(t, funcint.Any(empty, condition))
 }
 
 func TestFilter(t *testing.T) {
@@ -45,12 +45,12 @@ func TestFilter(t *testing.T) {
 
 	initial := []int{12, 8, 2, 0, 22, 87}
 
-	filtered := func_int.Filter(initial, condition)
+	filtered := funcint.Filter(initial, condition)
 
 	assert.Equal(t, 3, len(filtered))
 	assert.EqualValues(t, filtered, []int{12, 22, 87})
 
-	assert.Equal(t, len(func_int.Filter(empty, condition)), 0)
+	assert.Equal(t, len(funcint.Filter(empty, condition)), 0)
 }
 
 func TestFilterNot(t *testing.T) {
@@ -61,12 +61,12 @@ func TestFilterNot(t *testing.T) {
 
 	initial := []int{12, 8, 2, 0, 22, 87}
 
-	filtered := func_int.FilterNot(initial, condition)
+	filtered := funcint.FilterNot(initial, condition)
 
 	assert.Equal(t, 3, len(filtered))
 	assert.EqualValues(t, filtered, []int{8, 2, 0})
 
-	assert.Equal(t, len(func_int.FilterNot(empty, condition)), 0)
+	assert.Equal(t, len(funcint.FilterNot(empty, condition)), 0)
 }
 
 func TestFlatten(t *testing.T) {
@@ -76,8 +76,8 @@ func TestFlatten(t *testing.T) {
 
 	matrix := [][]int{slice1, slice2, slice3}
 
-	assert.EqualValues(t, []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, func_int.Flatten(matrix))
-	assert.Equal(t, len(empty), len(func_int.Flatten([][]int{empty})))
+	assert.EqualValues(t, []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, funcint.Flatten(matrix))
+	assert.Equal(t, len(empty), len(funcint.Flatten([][]int{empty})))
 }
 
 func TestFold(t *testing.T) {
@@ -87,8 +87,8 @@ func TestFold(t *testing.T) {
 
 	sliceToFold := []int{10, 20, 30, 40, 50}
 
-	assert.Equal(t, func_int.Fold(sliceToFold, 50, foldFn), 200)
-	assert.Equal(t, func_int.Fold(empty, 0, foldFn), 0)
+	assert.Equal(t, funcint.Fold(sliceToFold, 50, foldFn), 200)
+	assert.Equal(t, funcint.Fold(empty, 0, foldFn), 0)
 }
 
 func TestFoldR(t *testing.T) {
@@ -98,21 +98,21 @@ func TestFoldR(t *testing.T) {
 
 	sliceToFold := []int{10, 20, 30, 40, 50}
 
-	assert.Equal(t, func_int.FoldR(sliceToFold, 50, foldFn), 200)
-	assert.Equal(t, func_int.FoldR(empty, 0, foldFn), 0)
+	assert.Equal(t, funcint.FoldR(sliceToFold, 50, foldFn), 200)
+	assert.Equal(t, funcint.FoldR(empty, 0, foldFn), 0)
 }
 
 func TestForEach(t *testing.T) {
 	sliceToPrint := []int{10, 20, 30, 40, 50}
 
-	func_int.ForEach(sliceToPrint, func(x int) { fmt.Println(x) })
+	funcint.ForEach(sliceToPrint, func(x int) { fmt.Println(x) })
 }
 
 func TestIndexOf(t *testing.T) {
 	sliceToPrint := []int{10, 20, 30, 40, 50, 60, 70, 80, 90, 100}
 
-	assert.Equal(t, func_int.IndexOf(sliceToPrint, 60), 5)
-	assert.Equal(t, func_int.IndexOf(empty, 10), -1)
+	assert.Equal(t, funcint.IndexOf(sliceToPrint, 60), 5)
+	assert.Equal(t, funcint.IndexOf(empty, 10), -1)
 }
 
 func TestMap(t *testing.T) {
@@ -122,22 +122,22 @@ func TestMap(t *testing.T) {
 
 	slice := []int{10, 20, 30, 40, 50, 60, 70, 80, 90, 100}
 
-	assert.EqualValues(t, []int{11, 21, 31, 41, 51, 61, 71, 81, 91, 101}, func_int.Map(slice, mapFn))
-	assert.EqualValues(t, []int{}, func_int.Map(empty, mapFn))
+	assert.EqualValues(t, []int{11, 21, 31, 41, 51, 61, 71, 81, 91, 101}, funcint.Map(slice, mapFn))
+	assert.EqualValues(t, []int{}, funcint.Map(empty, mapFn))
 }
 
 func TestMax(t *testing.T) {
 	slice := []int{18, 75, 79, 29, 51, 94, 71}
 
-	assert.Equal(t, 94, func_int.Max(slice))
-	assert.Equal(t, 0, func_int.Max(empty))
+	assert.Equal(t, 94, funcint.Max(slice))
+	assert.Equal(t, 0, funcint.Max(empty))
 }
 
 func TestMin(t *testing.T) {
 	slice := []int{18, 75, 79, 29, 51, 94, 71}
 
-	assert.Equal(t, 18, func_int.Min(slice))
-	assert.Equal(t, 0, func_int.Min(empty))
+	assert.Equal(t, 18, funcint.Min(slice))
+	assert.Equal(t, 0, funcint.Min(empty))
 }
 
 func TestReduce(t *testing.T) {
@@ -147,8 +147,8 @@ func TestReduce(t *testing.T) {
 
 	sliceToFold := []int{10, 20, 30, 40, 50}
 
-	assert.Equal(t, 150, func_int.Reduce(sliceToFold, foldFn))
-	assert.Equal(t, 0, func_int.Reduce(empty, foldFn))
+	assert.Equal(t, 150, funcint.Reduce(sliceToFold, foldFn))
+	assert.Equal(t, 0, funcint.Reduce(empty, foldFn))
 }
 
 func TestReduceR(t *testing.T) {
@@ -158,6 +158,6 @@ func TestReduceR(t *testing.T) {
 
 	sliceToFold := []int{10, 20, 30, 40, 50}
 
-	assert.Equal(t, func_int.ReduceR(sliceToFold, foldFn), 150)
-	assert.Equal(t, func_int.ReduceR(empty, foldFn), 0)
+	assert.Equal(t, funcint.ReduceR(sliceToFold, foldFn), 150)
+	assert.Equal(t, funcint.ReduceR(empty, foldFn), 0)
 }

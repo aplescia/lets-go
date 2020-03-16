@@ -1,4 +1,4 @@
-package func_int
+package funcint
 
 func All(collection []int, fn func(int) bool) bool {
 	for i := 0; i < len(collection); i++ {

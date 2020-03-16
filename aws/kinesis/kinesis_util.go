@@ -11,6 +11,7 @@ var (
 	log, _ = util.InitLoggerWithLevel(nil)
 )
 
+//PutToKinesis puts a record 'input' to a stream 'streamName' in region 'streamRegion'.
 func PutToKinesis(streamName string, streamRegion string, input string) (bool, error) {
 	s, err := session.NewSession(&aws.Config{
 		Region: aws.String(streamRegion),
@@ -32,6 +33,7 @@ func PutToKinesis(streamName string, streamRegion string, input string) (bool, e
 	return true, nil
 }
 
+//PutManyRecordsToKinesis puts many records 'inputs' to a stream 'streamName' in region 'streamRegion'
 func PutManyRecordsToKinesis(streamName string, streamRegion string, inputs []string) (bool, error) {
 	s, err := session.NewSession(&aws.Config{
 		Region: &streamRegion,
