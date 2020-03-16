@@ -25,7 +25,8 @@ func TestParseTimeStringAsTimeOrNil(t *testing.T) {
 	assert.Equal(t, 1994, result.Year())
 	assert.Equal(t, "September", result.Month().String())
 	assert.Equal(t, 19, result.Day())
-	assert.Equal(t, 312, result.Nanosecond()/1_000_000)
+	nanoTime := result.Nanosecond()/1000000
+	assert.Equal(t, 312, nanoTime)
 	timeString = "hey, bobby!"
 	result, err = util.ParseTimeStringAsTimeOrNil(timeString, time.RFC3339Nano)
 	if err == nil {
