@@ -1,14 +1,15 @@
-// +build example
+//+build example
 
 package main
 
 import (
 	"fmt"
 	"github.com/Chewy-Inc/lets-go/db/redis"
+	"github.com/aws/aws-sdk-go/aws"
 )
 
 var (
-	clientPtr = redis.ClusterClient()
+	clientPtr = redis.ClusterClient(aws.String("dummypassword"))
 )
 
 func main() {

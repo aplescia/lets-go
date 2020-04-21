@@ -11,18 +11,22 @@ var (
 
 //ClusterClient creates a pointer to a redis cluster client. By default looks for a redis cluster at
 //localhost on port 7000. Address can be configured with the REDIS_HOST environment
-//variable. An example for elasticache:
+//variable. A password can be optionally passed in as a pointer to a string.
+//An example for elasticache:
 //	somecluster.amazonaws.com:6379
-func ClusterClient() *redis.ClusterClient {
+func ClusterClient(password *string) *redis.ClusterClient {
 
 	clusterURL := util.GetEnvOrDefault("REDIS_HOST", "127.0.0.1:7000")
-	clusterClient := redis.NewClusterClient(&redis.ClusterOptions{
-		Addrs: []string{clusterURL},
-	})
+	clientOptions := &redis.ClusterOptions{Addrs: []string{clusterURL}}
+	if password != nil && *password != "" {
+		clientOptions.Password = *password
+	}
+
+	clusterClient := redis.NewClusterClient(clientOptions)
 
 	_, err := clusterClient.Ping().Result()
 	if err != nil {
-		log.Error("Could not connect to redis!", err)
+		log.Error("Could not connect to redis! ", err)
 		return nil
 	}
 
