@@ -1,4 +1,4 @@
-module github.com/Chewy-Inc/lets-go
+module github.com/aplescia-chwy/lets-go
 
 require (
 	github.com/aws/aws-lambda-go v1.14.0
