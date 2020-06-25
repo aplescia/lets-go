@@ -4,7 +4,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/Chewy-Inc/lets-go/db/redis"
+	"github.com/aplescia-chwy/lets-go/db/redis"
 )
 
 var (

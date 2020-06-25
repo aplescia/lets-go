@@ -1,7 +1,7 @@
 package util_test
 
 import (
-	"github.com/Chewy-Inc/lets-go/util"
+	"github.com/aplescia-chwy/lets-go/util"
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 	"os"

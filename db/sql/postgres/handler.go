@@ -3,7 +3,7 @@ package postgres
 import (
 	"errors"
 	"fmt"
-	"github.com/Chewy-Inc/lets-go/util"
+	"github.com/aplescia-chwy/lets-go/util"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres" //postgres driver
 	"reflect"

@@ -1,7 +1,7 @@
 package secretsmanager_test
 
 import (
-	sm "github.com/Chewy-Inc/lets-go/aws/secretsmanager"
+	sm "github.com/aplescia-chwy/lets-go/aws/secretsmanager"
 	"testing"
 )
 

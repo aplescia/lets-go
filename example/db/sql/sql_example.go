@@ -4,7 +4,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/Chewy-Inc/lets-go/db/sql/postgres"
+	"github.com/aplescia-chwy/lets-go/db/sql/postgres"
 	log "github.com/sirupsen/logrus"
 )
 

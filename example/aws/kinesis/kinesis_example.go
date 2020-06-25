@@ -2,7 +2,7 @@
 
 package main
 
-import "github.com/Chewy-Inc/lets-go/aws/kinesis"
+import "github.com/aplescia-chwy/lets-go/aws/kinesis"
 
 func main() {
 	someKinesisString := "Hey, buddy! This is my Kinesis Payload!"

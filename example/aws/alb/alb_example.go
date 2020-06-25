@@ -5,7 +5,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/Chewy-Inc/lets-go/aws/alb"
+	"github.com/aplescia-chwy/lets-go/aws/alb"
 )
 
 func main() {

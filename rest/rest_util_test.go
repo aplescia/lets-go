@@ -2,7 +2,7 @@ package rest_test
 
 import (
 	"errors"
-	"github.com/Chewy-Inc/lets-go/rest"
+	"github.com/aplescia-chwy/lets-go/rest"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

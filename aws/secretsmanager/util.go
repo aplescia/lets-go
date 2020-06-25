@@ -1,7 +1,7 @@
 package secretsmanager
 
 import (
-	"github.com/Chewy-Inc/lets-go/util"
+	"github.com/aplescia-chwy/lets-go/util"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/secretsmanager"

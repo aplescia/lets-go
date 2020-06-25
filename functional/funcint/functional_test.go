@@ -2,7 +2,7 @@ package funcint_test
 
 import (
 	"fmt"
-	"github.com/Chewy-Inc/lets-go/functional/funcint"
+	"github.com/aplescia-chwy/lets-go/functional/funcint"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

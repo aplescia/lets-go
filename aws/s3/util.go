@@ -1,7 +1,7 @@
 package s3
 
 import (
-	"github.com/Chewy-Inc/lets-go/util"
+	"github.com/aplescia-chwy/lets-go/util"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"

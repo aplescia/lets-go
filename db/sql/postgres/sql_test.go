@@ -1,7 +1,7 @@
 package postgres_test
 
 import (
-	"github.com/Chewy-Inc/lets-go/db/sql/postgres"
+	"github.com/aplescia-chwy/lets-go/db/sql/postgres"
 	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"

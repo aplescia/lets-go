@@ -1,8 +1,8 @@
 # Let's Go
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/Chewy-Inc/lets-go)](https://goreportcard.com/report/github.com/Chewy-Inc/lets-go)
+[![Go Report Card](https://goreportcard.com/badge/github.com/aplescia-chwy/lets-go)](https://goreportcard.com/report/github.com/aplescia-chwy/lets-go)
 
-[GoDoc](https://pkg.go.dev/github.com/Chewy-Inc/lets-go)
+[GoDoc](https://pkg.go.dev/github.com/aplescia-chwy/lets-go)
 
 A module with some useful packages for anyone developing Golang applications on the cloud. 
 ---
@@ -26,5 +26,5 @@ therefore back to a client.
 Add the following to your go.mod file (or directly import it):
 
 ```shell script
-github.com/Chewy-Inc/lets-go
+github.com/aplescia-chwy/lets-go
 ```

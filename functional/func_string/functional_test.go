@@ -2,7 +2,7 @@ package func_string_test
 
 import (
 	"fmt"
-	"github.com/Chewy-Inc/lets-go/functional/func_string"
+	"github.com/aplescia-chwy/lets-go/functional/func_string"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
