@@ -4,6 +4,6 @@ go:
     - 1.x
 
 script:
-    - go test -coverprofile=coverage.out -v ./util
-    - go test -coverprofile=coverage.out -v ./rest
+    - go test -coverprofile=utilcoverage.out -v ./util
+    - go test -coverprofile=restcoverage.out -v ./rest
     - bash <(curl -s https://codecov.io/bash)
