@@ -1,0 +1,10 @@
+language: go
+
+go:
+    - 1.x
+
+script:
+    - go build ./...
+    - go test -v ./util
+    - go test -v ./rest
+    - go test -v ./functional/...
