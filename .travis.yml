@@ -2,7 +2,7 @@ language: go
 
 go:
     - 1.x
-    - master
 
 script:
+    - go build ./...
     - go test -v ./util
