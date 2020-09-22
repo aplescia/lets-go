@@ -2,9 +2,10 @@ package rest_test
 
 import (
 	"errors"
+	"testing"
+
 	"github.com/aplescia-chwy/lets-go/rest"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 type MyTestStruct struct {
@@ -22,14 +23,14 @@ func TestSerializeAsJsonApiResponse(t *testing.T) {
 		ID:   "10",
 		Name: "bob",
 	}
-	output, err := rest.SerializeAsJsonApiDocument(testObj)
+	output, err := rest.SerializeAsJSONAPIDocument(testObj)
 	t.Log(output, err)
-	output, err = rest.SerializeAsJsonApiDocument(&MyBadStruct{
+	output, err = rest.SerializeAsJSONAPIDocument(&MyBadStruct{
 		Name: "",
 		Code: 0,
 	})
 	t.Log(output, err)
-	output, err = rest.SerializeAsJsonApiDocument("hello")
+	output, err = rest.SerializeAsJSONAPIDocument("hello")
 	assert.NotNil(t, err)
 	t.Log(output, err)
 }
@@ -39,9 +40,9 @@ func TestUnmarshalJsonApiDocument(t *testing.T) {
 		ID:   "10",
 		Name: "bob",
 	}
-	output, _ := rest.SerializeAsJsonApiDocument(testObj)
+	output, _ := rest.SerializeAsJSONAPIDocument(testObj)
 	toBeDeserialized := new(MyTestStruct)
-	err := rest.UnmarshalJsonApiDocument([]byte(output), toBeDeserialized)
+	err := rest.UnmarshalJSONAPIDocument([]byte(output), toBeDeserialized)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -62,20 +63,20 @@ func TestUnmarshalManyJsonApiDocument(t *testing.T) {
 	objs = append(objs, testObj)
 	objs = append(objs, testObjTwo)
 	objs = append(objs, nil)
-	output, err := rest.SerializeAsJsonApiDocument(objs)
+	output, err := rest.SerializeAsJSONAPIDocument(objs)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(output)
-	res, err := rest.UnmarshalManyJsonApiDocument([]byte(output), testObjTwo)
+	res, err := rest.UnmarshalManyJSONAPIDocument([]byte(output), testObjTwo)
 	t.Log(len(res))
-	resString, err := rest.SerializeAsJsonApiDocument(res)
+	resString, err := rest.SerializeAsJSONAPIDocument(res)
 	t.Log(resString, err)
 }
 
 func TestJsonApiErrorResponse(t *testing.T) {
 	err := errors.New("This is my test Error")
-	res := rest.JsonApiErrorResponse(500, err)
+	res := rest.JSONAPIErrorResponse(500, err)
 	t.Log(res)
 	assert.NotEmpty(t, res)
 }
@@ -85,13 +86,13 @@ func TestMarshalling(t *testing.T) {
 		ID:   "10",
 		Name: "bob",
 	}
-	output, err := rest.MarshalAsJsonString(testObj)
+	output, err := rest.MarshalAsJSONString(testObj)
 	if err != nil {
 		t.Fatal(err)
 	}
 	t.Log(output)
 	var thingy MyTestStruct
-	err = rest.UnmarshalJsonString(output, &thingy)
+	err = rest.UnmarshalJSONString(output, &thingy)
 	if err != nil {
 		t.Fatal(err)
 	}
