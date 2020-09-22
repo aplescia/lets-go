@@ -14,7 +14,6 @@ Packages include:
 support for serializing/deserializing structs according to the JSON:API schema.
 * **redis** -- a package that provides utilities relevant to connecting with and interacting with a 
 Redis cluster. This is a common use case for AWS Elasticache.
-* **functional** -- useful functional utilities for primitive types.
 * **sql** -- a package that provides utilities relevant to connecting to and 
 interacting with a Postgres database. Makes use of the GORM library found [here](https://github.com/jinzhu/gorm).
 * **alb** -- a package that helps format responses to be sent from an AWS Lambda function back to a
