@@ -6,3 +6,5 @@ go:
 script:
     - go build ./...
     - go test -v ./util
+    - go test -v ./rest
+    - go test -v ./functional
