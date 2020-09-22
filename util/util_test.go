@@ -1,12 +1,13 @@
 package util_test
 
 import (
-	"github.com/aplescia-chwy/lets-go/util"
-	"github.com/sirupsen/logrus"
-	"github.com/stretchr/testify/assert"
 	"os"
 	"testing"
 	"time"
+
+	"github.com/aplescia-chwy/lets-go/util"
+	"github.com/sirupsen/logrus"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGetFinalElementOfPath(t *testing.T) {
@@ -25,7 +26,7 @@ func TestParseTimeStringAsTimeOrNil(t *testing.T) {
 	assert.Equal(t, 1994, result.Year())
 	assert.Equal(t, "September", result.Month().String())
 	assert.Equal(t, 19, result.Day())
-	nanoTime := result.Nanosecond()/1000000
+	nanoTime := result.Nanosecond() / 1000000
 	assert.Equal(t, 312, nanoTime)
 	timeString = "hey, bobby!"
 	result, err = util.ParseTimeStringAsTimeOrNil(timeString, time.RFC3339Nano)

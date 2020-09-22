@@ -13,7 +13,7 @@ var (
 
 //GetSecret retrieves a secret from Secrets Manager. Searches for a secret stored under the input
 //	secretId
-func GetSecret(secretId string) string {
+func GetSecret(secretID string) string {
 	sess, err := session.NewSession(&aws.Config{
 		Region: aws.String(util.GetEnvOrDefault("AWS_REGION", "us-east-1")),
 	})
@@ -21,7 +21,7 @@ func GetSecret(secretId string) string {
 		log.Fatalln(err)
 	}
 	svc := secretsmanager.New(sess)
-	output, err := svc.GetSecretValue(&secretsmanager.GetSecretValueInput{SecretId: &secretId})
+	output, err := svc.GetSecretValue(&secretsmanager.GetSecretValueInput{SecretId: &secretID})
 	if err != nil {
 		log.Fatalln(err)
 	}
