@@ -1,6 +1,7 @@
 # Let's Go
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/aplescia-chwy/lets-go)](https://goreportcard.com/report/github.com/aplescia-chwy/lets-go)
+[![codecov](https://codecov.io/gh/aplescia-chwy/lets-go/branch/master/graph/badge.svg)](https://codecov.io/gh/aplescia-chwy/lets-go)
 
 [GoDoc](https://pkg.go.dev/github.com/aplescia-chwy/lets-go)
 
