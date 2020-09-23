@@ -1,10 +1,12 @@
 package sqs_test
 
 import (
+	"fmt"
 	"os"
 	"testing"
 
 	sq "github.com/aplescia-chwy/lets-go/aws/sqs"
+	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/service/sqs"
@@ -29,4 +31,21 @@ func TestPushToSqsAndReturnErrors(t *testing.T) {
 	if err != nil {
 		t.Fatal(err.Error())
 	}
+}
+
+func TestProcessSqsEvent(t *testing.T) {
+	msg := events.SQSMessage{
+		Body: "hey",
+	}
+	var records []events.SQSMessage
+	records = append(records, msg)
+	event := events.SQSEvent{
+		Records: records,
+	}
+	sq.ProcessSqsEvent(event, processingFunc)
+}
+
+func processingFunc(event events.SQSMessage) error {
+	fmt.Println(event.Body)
+	return nil
 }

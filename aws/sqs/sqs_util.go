@@ -2,6 +2,7 @@ package sqs
 
 import (
 	"github.com/aplescia-chwy/lets-go/util"
+	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/sqs"
@@ -27,4 +28,17 @@ func PushToSqsAndReturnErrors(client *sqs.SQS, input *sqs.SendMessageInput) erro
 		logger.Printf("SQS Message Publish Successful To Queue %v! ", input.QueueUrl)
 	}
 	return err
+}
+
+func GetSqsEventLength(event events.SQSEvent) int {
+	return len(event.Records)
+}
+
+func ProcessSqsEvent(event events.SQSEvent, messageProcessingFunc func(events.SQSMessage) error) {
+	for _, r := range event.Records {
+		e := messageProcessingFunc(r)
+		if e != nil {
+			logger.Errorf("%e", e)
+		}
+	}
 }
