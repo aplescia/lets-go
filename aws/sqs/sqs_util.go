@@ -30,10 +30,13 @@ func PushToSqsAndReturnErrors(client *sqs.SQS, input *sqs.SendMessageInput) erro
 	return err
 }
 
+//GetSqsEventLength gets the number of records in SQS Event event.
 func GetSqsEventLength(event events.SQSEvent) int {
 	return len(event.Records)
 }
 
+//ProcessSqsEvent runs func messageProcessingFunc on each record in SQS Event event. Logs any errors
+//at log level ERROR.
 func ProcessSqsEvent(event events.SQSEvent, messageProcessingFunc func(events.SQSMessage) error) {
 	for _, r := range event.Records {
 		e := messageProcessingFunc(r)
