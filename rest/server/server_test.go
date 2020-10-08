@@ -11,5 +11,4 @@ func TestBuildServer(t *testing.T) {
 		c.String(200, "OK")
 	})
 	RunOnPort(server, 8081)
-
 }

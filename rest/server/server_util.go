@@ -6,11 +6,13 @@ import (
 )
 
 //BuildServer returns a default gin Server Engine.
+//See: https://github.com/gin-gonic/gin
 func BuildServer() *gin.Engine {
 	return gin.Default()
 }
 
 //RunOnPort runs the specified gin Engine on the specified port.
+//See: https://github.com/gin-gonic/gin
 func RunOnPort(engine *gin.Engine, port int){
 	err := engine.Run(fmt.Sprintf(":%d",port))
 	if err != nil {
@@ -19,6 +21,7 @@ func RunOnPort(engine *gin.Engine, port int){
 }
 
 //Add route will add a handler func under the specified path responding to the specified http method.
+//See: https://github.com/gin-gonic/gin
 func AddRoute(server *gin.Engine, method string, path string, handler gin.HandlerFunc){
 	switch method {
 	case "GET":
