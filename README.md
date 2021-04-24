@@ -26,5 +26,5 @@ therefore back to a client.
 Add the following to your go.mod file (or directly import it):
 
 ```shell script
-github.com/aplescia-chwy/lets-go
+github.com/aplescia/lets-go
 ```
